@@ -1,3 +1,5 @@
+import json
+
 import requests
 from config import AIRNOW_API_KEY, AIRNOW_CURRENT_OBSERVATION_URL, AIRNOW_DISTANCE_MILES
 
@@ -14,10 +16,12 @@ def fetch_current_air_quality(zip_code: str) -> list[dict] | None:
         response = requests.get(
             AIRNOW_CURRENT_OBSERVATION_URL,
             params=params,
-            timeout=10
+            timeout=10,
         )
         response.raise_for_status()
         data = response.json()
-        return data if data else None
+        return data if data else []
     except requests.RequestException:
+        return None
+    except (json.JSONDecodeError, ValueError):
         return None

@@ -93,24 +93,35 @@ if search_clicked:
 
     if data is None:
         st.warning(
-            "⚠️ AtmosIQ could not find air quality data for that ZIP code. "
-            "Please check the ZIP code and try again."
+            "⚠️ AtmosIQ encountered a problem reaching the air quality service. "
+            "Please check your connection and try again in a moment."
+        )
+    elif data == []:
+        st.warning(
+            "📍 No air quality monitoring stations were found within 25 miles of "
+            f"ZIP code {zip_code}. Try a ZIP code for a nearby city."
         )
     else:
         main_reading = extract_main_reading(data)
 
-        st.session_state.aqi_data = {
-            "aqi": main_reading["AQI"],
-            "pollutant": main_reading["ParameterName"],
-            "category": main_reading["Category"]["Name"],
-            "reporting_area": main_reading["ReportingArea"],
-            "state_code": main_reading["StateCode"],
-            "zip_code": zip_code,
-            "local_time": get_local_time_from_zip(zip_code),
-        }
+        if main_reading is None:
+            st.warning(
+                "⚠️ AtmosIQ received data but it was not in the expected format. "
+                "Please try again or use a different ZIP code."
+            )
+        else:
+            st.session_state.aqi_data = {
+                "aqi": main_reading.get("AQI"),
+                "pollutant": main_reading["ParameterName"],
+                "category": main_reading["Category"]["Name"],
+                "reporting_area": main_reading["ReportingArea"],
+                "state_code": main_reading["StateCode"],
+                "zip_code": zip_code,
+                "local_time": get_local_time_from_zip(zip_code),
+            }
 
-        st.session_state.chat_history = []
-        st.session_state.pending_warning = None
+            st.session_state.chat_history = []
+            st.session_state.pending_warning = None
 
 if st.session_state.aqi_data is not None:
     saved = st.session_state.aqi_data
