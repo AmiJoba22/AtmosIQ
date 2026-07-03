@@ -1,9 +1,11 @@
 import json
 
 import requests
+import streamlit as st
 from config import AIRNOW_API_KEY, AIRNOW_CURRENT_OBSERVATION_URL, AIRNOW_DISTANCE_MILES
 
 
+@st.cache_data(ttl=1800)
 def fetch_current_air_quality(zip_code: str) -> list[dict] | None:
     params = {
         "format": "application/json",

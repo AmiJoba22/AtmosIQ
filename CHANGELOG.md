@@ -64,3 +64,26 @@ Learned:
 - Function Contracts
 - Defense in Depth
 - User Experience During Failures
+
+
+## Task 4 – API Caching & Performance Optimization
+
+### Changed
+- Added application-level caching to the AirNow API client using `@st.cache_data`.
+- Configured a cache Time-To-Live (TTL) of 30 minutes.
+- Reduced unnecessary API requests for repeated ZIP code searches.
+- Improved application performance and reduced reliance on external API calls.
+
+### Why
+- Improves response times for repeated requests.
+- Reduces API usage and helps avoid rate limits.
+- Increases application reliability during temporary API outages.
+- Provides a scalable caching strategy while maintaining reasonably fresh air quality data.
+
+### Software Engineering Concepts Learned
+- Application-Level Caching
+- Session State vs. Application Cache
+- Time-To-Live (TTL)
+- API Rate Limiting
+- Performance Optimization
+- Resilience Engineering
