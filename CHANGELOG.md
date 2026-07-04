@@ -114,3 +114,20 @@ Learned:
 - DRY Principle
 - Single Source of Truth
 - Refactoring Without Behavior Changes
+
+## Task 6 – Readability Improvement for NaN Handling
+
+### Changed
+- Replaced the unclear NaN self-comparison in `services/timezone_service.py`.
+- Added `pd.isna()` to make missing coordinate detection more readable.
+
+### Why
+- Improves code clarity.
+- Replaces clever logic with explicit intent.
+- Makes the timezone lookup code easier to understand and maintain.
+
+### Software Engineering Concepts Learned
+- NaN Handling
+- Clarity Over Cleverness
+- Readability
+- Maintainability

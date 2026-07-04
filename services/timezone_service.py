@@ -1,6 +1,7 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+import pandas as pd
 import pgeocode
 from timezonefinder import TimezoneFinder
 
@@ -12,7 +13,7 @@ timezone_finder = TimezoneFinder()
 def get_timezone_from_zip(zip_code: str) -> str | None:
     location = geo_locator.query_postal_code(zip_code)
 
-    if location is None or location.latitude != location.latitude:
+    if location is None or pd.isna(location.latitude):
         return None
 
     timezone_name = timezone_finder.timezone_at(
