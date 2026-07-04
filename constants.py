@@ -1,0 +1,30 @@
+# AQI numeric thresholds — upper boundary of each category
+AQI_GOOD = 50
+AQI_MODERATE = 100
+AQI_SENSITIVE = 150
+AQI_UNHEALTHY = 200
+AQI_VERY_UNHEALTHY = 300
+
+# AQI category labels
+LABEL_GOOD = "Good"
+LABEL_MODERATE = "Moderate"
+LABEL_SENSITIVE = "Unhealthy for Sensitive Groups"
+LABEL_UNHEALTHY = "Unhealthy"
+LABEL_VERY_UNHEALTHY = "Very Unhealthy"
+LABEL_HAZARDOUS = "Hazardous"
+
+# AQI category colors
+COLOR_GOOD = "#10B981"
+COLOR_MODERATE = "#FBBF24"
+COLOR_SENSITIVE = "#F97316"
+COLOR_UNHEALTHY = "#EF4444"
+COLOR_VERY_UNHEALTHY = "#8B5CF6"
+COLOR_HAZARDOUS = "#7F1D1D"
+
+# AQI category emojis
+EMOJI_GOOD = "🟢"
+EMOJI_MODERATE = "🟡"
+EMOJI_SENSITIVE = "🟠"
+EMOJI_UNHEALTHY = "🔴"
+EMOJI_VERY_UNHEALTHY = "🟣"
+EMOJI_HAZARDOUS = "⚫"

@@ -1,26 +1,29 @@
+import constants
+
+
 def get_aqi_style(aqi: int) -> dict:
-    if aqi <= 50:
-        return {"label": "Good", "emoji": "🟢", "color": "#10B981"}
-    if aqi <= 100:
-        return {"label": "Moderate", "emoji": "🟡", "color": "#FBBF24"}
-    if aqi <= 150:
-        return {"label": "Unhealthy for Sensitive Groups", "emoji": "🟠", "color": "#F97316"}
-    if aqi <= 200:
-        return {"label": "Unhealthy", "emoji": "🔴", "color": "#EF4444"}
-    if aqi <= 300:
-        return {"label": "Very Unhealthy", "emoji": "🟣", "color": "#8B5CF6"}
-    return {"label": "Hazardous", "emoji": "⚫", "color": "#7F1D1D"}
+    if aqi <= constants.AQI_GOOD:
+        return {"label": constants.LABEL_GOOD, "emoji": constants.EMOJI_GOOD, "color": constants.COLOR_GOOD}
+    if aqi <= constants.AQI_MODERATE:
+        return {"label": constants.LABEL_MODERATE, "emoji": constants.EMOJI_MODERATE, "color": constants.COLOR_MODERATE}
+    if aqi <= constants.AQI_SENSITIVE:
+        return {"label": constants.LABEL_SENSITIVE, "emoji": constants.EMOJI_SENSITIVE, "color": constants.COLOR_SENSITIVE}
+    if aqi <= constants.AQI_UNHEALTHY:
+        return {"label": constants.LABEL_UNHEALTHY, "emoji": constants.EMOJI_UNHEALTHY, "color": constants.COLOR_UNHEALTHY}
+    if aqi <= constants.AQI_VERY_UNHEALTHY:
+        return {"label": constants.LABEL_VERY_UNHEALTHY, "emoji": constants.EMOJI_VERY_UNHEALTHY, "color": constants.COLOR_VERY_UNHEALTHY}
+    return {"label": constants.LABEL_HAZARDOUS, "emoji": constants.EMOJI_HAZARDOUS, "color": constants.COLOR_HAZARDOUS}
 
 
 def get_recommendation(aqi: int) -> str:
-    if aqi <= 50:
+    if aqi <= constants.AQI_GOOD:
         return "Air quality looks good today. Outdoor activities are a strong option for most people."
-    if aqi <= 100:
+    if aqi <= constants.AQI_MODERATE:
         return "Air quality is moderate. Most people can go outside, but sensitive groups should pay attention."
-    if aqi <= 150:
+    if aqi <= constants.AQI_SENSITIVE:
         return "Air quality may affect sensitive groups. Consider reducing prolonged outdoor activity if you have asthma, allergies, or breathing sensitivity."
-    if aqi <= 200:
+    if aqi <= constants.AQI_UNHEALTHY:
         return "Air quality is unhealthy. Consider limiting long or intense outdoor activity."
-    if aqi <= 300:
+    if aqi <= constants.AQI_VERY_UNHEALTHY:
         return "Air quality is very unhealthy. Outdoor activity should be limited when possible."
     return "Air quality is hazardous. Staying indoors is the safest option."

@@ -87,3 +87,30 @@ Learned:
 - API Rate Limiting
 - Performance Optimization
 - Resilience Engineering
+
+
+## Task 5 – Named Constants & DRY Principle
+
+### Added
+- Created `constants.py` as the single source of truth for AQI thresholds, labels, colors, and emojis.
+
+### Changed
+- Replaced hardcoded AQI values across:
+  - `services/recommendation.py`
+  - `services/chatbot.py`
+  - `ui/charts.py`
+- Updated chart ranges to derive boundaries from named constants.
+- Fixed a small indentation issue in `services/chatbot.py`.
+
+### Why
+- Removes duplicated AQI domain values.
+- Makes the code easier to read and maintain.
+- Prevents future inconsistencies between chatbot logic, recommendations, and charts.
+- Applies the DRY principle across the project.
+
+### Software Engineering Concepts Learned
+- Named Constants
+- Magic Numbers
+- DRY Principle
+- Single Source of Truth
+- Refactoring Without Behavior Changes

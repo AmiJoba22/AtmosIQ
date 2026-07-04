@@ -1,3 +1,5 @@
+import constants
+
 import plotly.graph_objects as go
 import streamlit as st
 
@@ -12,12 +14,12 @@ def render_aqi_gauge(current_aqi: int) -> None:
                 "axis": {"range": [0, 500]},
                 "bar": {"color": "#22D3EE"},
                 "steps": [
-                    {"range": [0, 50], "color": "#10B981"},
-                    {"range": [51, 100], "color": "#FBBF24"},
-                    {"range": [101, 150], "color": "#F97316"},
-                    {"range": [151, 200], "color": "#EF4444"},
-                    {"range": [201, 300], "color": "#8B5CF6"},
-                    {"range": [301, 500], "color": "#7F1D1D"},
+                    {"range": [0,                                constants.AQI_GOOD],           "color": constants.COLOR_GOOD},
+                    {"range": [constants.AQI_GOOD + 1,           constants.AQI_MODERATE],       "color": constants.COLOR_MODERATE},
+                    {"range": [constants.AQI_MODERATE + 1,       constants.AQI_SENSITIVE],      "color": constants.COLOR_SENSITIVE},
+                    {"range": [constants.AQI_SENSITIVE + 1,      constants.AQI_UNHEALTHY],      "color": constants.COLOR_UNHEALTHY},
+                    {"range": [constants.AQI_UNHEALTHY + 1,      constants.AQI_VERY_UNHEALTHY], "color": constants.COLOR_VERY_UNHEALTHY},
+                    {"range": [constants.AQI_VERY_UNHEALTHY + 1, 500],                          "color": constants.COLOR_HAZARDOUS},
                 ],
             },
         )
@@ -35,12 +37,48 @@ def render_aqi_gauge(current_aqi: int) -> None:
 
 def render_aqi_health_guide(current_aqi: int) -> None:
     categories = [
-        {"emoji": "🟢", "name": "Good", "range": "0–50", "min": 0, "max": 50},
-        {"emoji": "🟡", "name": "Moderate", "range": "51–100", "min": 51, "max": 100},
-        {"emoji": "🟠", "name": "Unhealthy for Sensitive Groups", "range": "101–150", "min": 101, "max": 150},
-        {"emoji": "🔴", "name": "Unhealthy", "range": "151–200", "min": 151, "max": 200},
-        {"emoji": "🟣", "name": "Very Unhealthy", "range": "201–300", "min": 201, "max": 300},
-        {"emoji": "⚫", "name": "Hazardous", "range": "301–500", "min": 301, "max": 500},
+        {
+            "emoji": constants.EMOJI_GOOD,
+            "name": constants.LABEL_GOOD,
+            "range": f"0–{constants.AQI_GOOD}",
+            "min": 0,
+            "max": constants.AQI_GOOD,
+        },
+        {
+            "emoji": constants.EMOJI_MODERATE,
+            "name": constants.LABEL_MODERATE,
+            "range": f"{constants.AQI_GOOD + 1}–{constants.AQI_MODERATE}",
+            "min": constants.AQI_GOOD + 1,
+            "max": constants.AQI_MODERATE,
+        },
+        {
+            "emoji": constants.EMOJI_SENSITIVE,
+            "name": constants.LABEL_SENSITIVE,
+            "range": f"{constants.AQI_MODERATE + 1}–{constants.AQI_SENSITIVE}",
+            "min": constants.AQI_MODERATE + 1,
+            "max": constants.AQI_SENSITIVE,
+        },
+        {
+            "emoji": constants.EMOJI_UNHEALTHY,
+            "name": constants.LABEL_UNHEALTHY,
+            "range": f"{constants.AQI_SENSITIVE + 1}–{constants.AQI_UNHEALTHY}",
+            "min": constants.AQI_SENSITIVE + 1,
+            "max": constants.AQI_UNHEALTHY,
+        },
+        {
+            "emoji": constants.EMOJI_VERY_UNHEALTHY,
+            "name": constants.LABEL_VERY_UNHEALTHY,
+            "range": f"{constants.AQI_UNHEALTHY + 1}–{constants.AQI_VERY_UNHEALTHY}",
+            "min": constants.AQI_UNHEALTHY + 1,
+            "max": constants.AQI_VERY_UNHEALTHY,
+        },
+        {
+            "emoji": constants.EMOJI_HAZARDOUS,
+            "name": constants.LABEL_HAZARDOUS,
+            "range": f"{constants.AQI_VERY_UNHEALTHY + 1}–500",
+            "min": constants.AQI_VERY_UNHEALTHY + 1,
+            "max": 500,
+        },
     ]
 
     st.markdown("### 🌈 AQI Risk Levels")

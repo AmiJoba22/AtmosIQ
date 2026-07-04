@@ -1,3 +1,5 @@
+import constants
+
 from services.recommendation import get_recommendation
 
 
@@ -6,15 +8,15 @@ def branded_response(message: str) -> str:
 
 
 def air_quality_summary(aqi: int, category: str) -> str:
-    if aqi <= 50:
+    if aqi <= constants.AQI_GOOD:
         return "Today's air quality looks good."
-    if aqi <= 100:
+    if aqi <= constants.AQI_MODERATE:
         return "Today's air quality is moderate."
-    if aqi <= 150:
+    if aqi <= constants.AQI_SENSITIVE:
         return "Air quality may affect sensitive groups today."
-    if aqi <= 200:
+    if aqi <= constants.AQI_UNHEALTHY:
         return "Air quality is unhealthy today."
-    if aqi <= 300:
+    if aqi <= constants.AQI_VERY_UNHEALTHY:
         return "Air quality is very unhealthy today."
     return "Air quality is hazardous today."
 
@@ -29,13 +31,13 @@ def generate_chatbot_response(
     summary = air_quality_summary(aqi, category)
 
     if any(phrase in question for phrase in ["who is atmosiq", "what is atmosiq", "tell me about atmosiq", "who are you"]):
-     return branded_response(
-        "I'm AtmosIQ, your intelligent air quality companion. "
-        "I help turn live air quality data into simple guidance so you can make better everyday decisions about outdoor activity, health, and environmental awareness."
-    )
+        return branded_response(
+            "I'm AtmosIQ, your intelligent air quality companion. "
+            "I help turn live air quality data into simple guidance so you can make better everyday decisions about outdoor activity, health, and environmental awareness."
+        )
 
     if any(word in question for word in ["run", "exercise", "workout", "jog"]):
-        if aqi <= 100:
+        if aqi <= constants.AQI_MODERATE:
             return branded_response(
                 f"{summary} Outdoor exercise should be reasonable for most people. "
                 "If you are sensitive to air pollution, keep the workout lighter and pay attention to how you feel."
@@ -45,11 +47,11 @@ def generate_chatbot_response(
         )
 
     if any(word in question for word in ["kids", "children", "child", "play", "recess"]):
-        if aqi <= 50:
+        if aqi <= constants.AQI_GOOD:
             return branded_response(
                 f"{summary} Outdoor play is a good option for most children."
             )
-        if aqi <= 100:
+        if aqi <= constants.AQI_MODERATE:
             return branded_response(
                 f"{summary} Outdoor play may be okay, but children who are sensitive to air pollution should take breaks."
             )
@@ -58,7 +60,7 @@ def generate_chatbot_response(
         )
 
     if "mask" in question:
-        if aqi <= 100:
+        if aqi <= constants.AQI_MODERATE:
             return branded_response(
                 f"{summary} A mask is usually not necessary for most people, but sensitive individuals should use personal judgment."
             )
@@ -67,7 +69,7 @@ def generate_chatbot_response(
         )
 
     if any(word in question for word in ["asthma", "breathing", "allergies", "lungs"]):
-        if aqi <= 100:
+        if aqi <= constants.AQI_MODERATE:
             return branded_response(
                 f"{summary} If you have asthma or breathing sensitivity, stay aware of symptoms and follow your healthcare provider's guidance."
             )
@@ -76,7 +78,7 @@ def generate_chatbot_response(
         )
 
     if any(word in question for word in ["hiking", "bike", "cycling", "walk", "dog"]):
-        if aqi <= 100:
+        if aqi <= constants.AQI_MODERATE:
             return branded_response(
                 f"{summary} Outdoor activity should be manageable for most people. Consider keeping it shorter if you are sensitive."
             )
@@ -85,12 +87,12 @@ def generate_chatbot_response(
         )
 
     if any(word in question for word in ["mood", "focus", "tired", "energy"]):
-        if aqi <= 100:
+        if aqi <= constants.AQI_MODERATE:
             return branded_response(
                 f"{summary} Air quality is less likely to be a major issue for most people today, but mood and focus can also be affected by sleep, stress, hydration, and overall health."
             )
         return branded_response(
-                f"{summary} Poor air quality may affect comfort, energy, or focus for some people. It is still one factor among sleep, stress, hydration, and health."
+            f"{summary} Poor air quality may affect comfort, energy, or focus for some people. It is still one factor among sleep, stress, hydration, and health."
         )
 
     if "pm2.5" in question or "pm25" in question:
