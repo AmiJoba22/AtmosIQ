@@ -189,15 +189,15 @@ This project is intended for educational and portfolio purposes.
 
 ---
 
-# Documentation
+## Documentation
 
 [AtmosIQ Technical Documentation](https://docs.google.com/document/d/17WHySi3o8bqhcPcs2wd5Obu0u_WT06m4DQi62mrmfYo/edit?usp=sharing)
 
-# Website Presentation
+## Website Presentation
 
 [AtmosIQ Website Presentation](https://aminajobarteh40.wixsite.com/atmosiq)
 
-# AtmosIQ Demo (Version 1.0)
+## AtmosIQ Demo (Version 1.0)
 [Watch Demo Video!](https://drive.google.com/file/d/1HZ_qU8Pzlg3pzKnHmcq9HfETk_1nzg2-/view?usp=drive_link)
 
 ## 👨‍💻 Developers
