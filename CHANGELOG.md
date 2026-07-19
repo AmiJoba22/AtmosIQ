@@ -131,3 +131,60 @@ Learned:
 - Clarity Over Cleverness
 - Readability
 - Maintainability
+
+Task 7 – Structured Application Logging
+Overview
+
+Implemented structured logging across the application using Python's built-in logging module. Logging replaces ad hoc debugging with consistent, timestamped log messages that improve troubleshooting and observability while protecting sensitive information.
+
+Key Improvements
+Configured centralized logging in config.py
+Added console and rotating file logging (logs/atmosiq.log)
+Prevented duplicate log handlers
+Added informative log messages throughout the application
+Logged API request lifecycle and application events
+Logged warnings for invalid or missing data
+Logged errors for HTTP failures and unexpected exceptions
+Excluded sensitive information such as API keys and user data from logs
+Added logs/ to .gitignore
+Benefits
+Simplifies debugging during development
+Creates an audit trail for application events
+Improves production troubleshooting
+Prevents sensitive credentials from appearing in log files
+Supports future scalability and monitoring
+
+
+
+
+Task 8 – Unit Testing with pytest
+Overview
+
+Added a comprehensive automated test suite using pytest to validate the application's core business logic and API error handling. Tests ensure the application behaves correctly under both normal and failure scenarios while allowing future refactoring with confidence.
+
+Test Coverage
+AQI Recommendation Logic
+Verified every AQI category boundary
+Tested all recommendation tiers
+Validated label and color consistency
+Confirmed correct return types
+Data Formatting
+Verified PM2.5 is prioritized when available
+Tested fallback behavior for other pollutants
+Validated handling of invalid readings
+Tested empty and malformed datasets
+Confirmed required data fields remain accessible
+AirNow API
+Successful API responses
+Empty API responses
+HTTP error handling
+Connection failures
+Timeout handling
+Invalid JSON handling
+Testing Infrastructure
+Added requirements-dev.txt for development dependencies
+Added tests/ package
+Added conftest.py for test environment configuration
+Used unittest.mock.patch to mock HTTP requests
+Prevented real API calls during testing
+Cleared Streamlit cache between tests for isolated execution
